@@ -57,7 +57,7 @@ class DollarBot(irc.IRCClient):
             except:
                 pass
             if value is None:
-                self.msg(channel, '%s, valor inválido: %s' % (user, value))
+                self.msg(channel, '%s, valor inválido: %s' % (user, pieces[1]))
                 return
 
             talk = None
