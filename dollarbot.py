@@ -38,8 +38,10 @@ class DollarBot(irc.IRCClient):
         # !dollar command
         if len(pieces) == 1:
             if pieces[0] == '!dollar':
-                self.msg(channel, '%s, cotação atual: %.6f' % \
-                         (user, 1.0 / self.factory.visa.rate))
+                self.msg(channel, '%s, cotação atual: %s (%s)' % \
+                         (user, 1.0 / self.factory.visa.rate,
+                          self.factory.visa.rate_date.strftime(
+                              '%d/%m/%Y %H:%M:%S')))
             elif pieces[0] == '!dance':
                 self.msg(channel, ':D\<')
                 self.msg(channel, ':D/<')
@@ -73,7 +75,10 @@ class DollarBot(irc.IRCClient):
                 talk = '%s USD = %s BRL' % (value, converted)
 
             if talk is not None:
-                self.msg(channel, '%s, %s' % (user, talk))
+                self.msg(channel,
+                         '%s, %s (%s)' % (user, talk,
+                                          self.factory.visa.rate_date.strftime(
+                                              '%d/%m/%Y %H:%M:%S')))
 
 
 class DollarBotFactory(protocol.ClientFactory):

@@ -17,7 +17,7 @@ _visa_url = 'http://corporate.visa.com/pd/consumer_services/' + \
 class VisaExchangeRate:
 
     _rate_cache = None
-    _cache_time = None
+    _time_cache = None
 
     def __init__(self, from_cur, for_cur, fee, cache_lifetime=3600):
         self._from_cur = from_cur
@@ -30,10 +30,10 @@ class VisaExchangeRate:
                + ' integer.'
 
     def _get_rate(self):
-        if self._cache_time is not None:
+        if self._time_cache is not None:
             now = datetime.now()
             lifetime = timedelta(seconds=self._cache_lifetime)
-            if self._cache_time + lifetime > now:
+            if self._time_cache + lifetime > now:
                 return
         today = date.today()
         today_str = today.strftime('%m/%d/%Y')
@@ -56,7 +56,7 @@ class VisaExchangeRate:
         assert pieces['from'] == self._from_cur, 'unreliable HTML content.'
         assert pieces['for'] == self._for_cur, 'unreliable HTML content.'
         self._rate_cache = float(pieces['rate'])
-        self._cache_time = datetime.now()
+        self._time_cache = datetime.now()
 
     def convert(self, value):
         self._get_rate()
@@ -70,6 +70,11 @@ class VisaExchangeRate:
     def rate(self):
         self._get_rate()
         return self._rate_cache
+
+    @property
+    def rate_date(self):
+        self._get_rate()
+        return self._time_cache
 
 if __name__ == '__main__':
     visa = VisaExchangeRate('USD', 'BRL', 3)
