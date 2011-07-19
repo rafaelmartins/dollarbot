@@ -41,7 +41,7 @@ class DollarBot(irc.IRCClient):
                      (user, 1.0 / self.factory.visa.rate))
 
         # conversion commands
-        elif len(pieces) == 2:
+        elif len(pieces) == 2 and pieces[0] in ('!brl', '!usd'):
 
             # validate value
             value = None
