@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*-
+
+HOST = 'irc.freenode.net'
+PORT = 6667
+CHANNELS = ['#gsoc-br']
+NICKNAME = 'dollarbot'
+PASSWORD = 'your password'
