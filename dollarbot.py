@@ -36,9 +36,16 @@ class DollarBot(irc.IRCClient):
         pieces = msg.split()
 
         # !dollar command
-        if len(pieces) == 1 and pieces[0] == '!dollar':
-            self.msg(channel, '%s, cotação atual: %.6f' % \
-                     (user, 1.0 / self.factory.visa.rate))
+        if len(pieces) == 1:
+            if pieces[0] == '!dollar':
+                self.msg(channel, '%s, cotação atual: %.6f' % \
+                         (user, 1.0 / self.factory.visa.rate))
+            elif pieces[0] == '!dance':
+                self.msg(channel, ':D\<')
+                self.msg(channel, ':D/<')
+                self.msg(channel, ':D|<')
+                self.msg(channel, ':D\<')
+                self.msg(channel, ':D/<')
 
         # conversion commands
         elif len(pieces) == 2 and pieces[0] in ('!brl', '!usd'):
