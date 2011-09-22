@@ -89,7 +89,7 @@ class DollarBotFactory(protocol.ClientFactory):
         self.channels = channels
         self.nickname = nickname
         self.password = password
-        self.visa = visa.VisaExchangeRate('USD', 'BRL', 3, 6 * 3600)
+        self.visa = visa.VisaExchangeRate('USD', 'BRL', 3, 3600)
 
     def clientConnectionLost(self, connector, reason):
         print "Lost connection (%s), reconnecting." % reason
